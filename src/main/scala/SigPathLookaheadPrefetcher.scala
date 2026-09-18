@@ -183,10 +183,10 @@ class SigPathlookaheadPrefetcher(params: SigPathPrefetcher) (implicit p: Paramet
                 state := s_idle
                 baseAddr := blockAddr
                 currBlock_offset := pageOffset
-                phtSigTag := signature_table(indexSigTable).signature.patternSign
-                phtSigDel := (pageOffset.zext - signature_table(indexSigTable).last_offset.zext).asSInt
                 prevConf := 196.U
             }
+            phtSigTag := signature_table(indexSigTable).signature.patternSign
+            phtSigDel := (pageOffset.zext - signature_table(indexSigTable).last_offset.zext).asSInt
             offset_ST := (pageOffset - signature_table(indexSigTable).last_offset).asSInt
             signature_table(indexSigTable).signature.patternSign := (signature_table(indexSigTable).signature.patternSign << 3) ^ (pageOffset.zext - signature_table(indexSigTable).last_offset.zext).asUInt
             signature_table(indexSigTable).signature.signDelta := (pageOffset.zext - signature_table(indexSigTable).last_offset.zext).asSInt
